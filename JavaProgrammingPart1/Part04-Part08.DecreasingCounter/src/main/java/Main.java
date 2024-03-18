@@ -1,11 +1,11 @@
-public class Part04_07DecreasingCounter {
+public class Main {
 
     public static void main(String[] args) {
-        DecreasingCounter counter = new DecreasingCounter(1);
+        DecreasingCounter counter = new DecreasingCounter(100);
         
         counter.printValue();
         
-        counter.decrement();
+        counter.reset();
         counter.printValue();
         
         counter.decrement();

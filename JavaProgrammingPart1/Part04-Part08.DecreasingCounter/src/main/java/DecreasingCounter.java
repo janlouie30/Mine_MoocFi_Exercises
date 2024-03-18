@@ -11,9 +11,12 @@ public class DecreasingCounter {
     }
     
     public void decrement() {
-        if (this.value > 0) {
+        if(this.value > 0) {
             this.value--;
         }
     }
     
+    public void reset() {
+        this.value = 0;
+    }
 }
