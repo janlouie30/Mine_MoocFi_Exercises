@@ -31,7 +31,7 @@ public class StoringRecords {
                 String[] parts = row.split(",");
                 int age = Integer.parseInt(parts[1]);
 
-                persons.add(new Person(row, age));
+                persons.add(new Person(parts[0], age));
             }
         } catch (Exception e) {
             System.out.println("ERROR!");

@@ -5,10 +5,15 @@ public class FirstWords {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
-        String text = scanner.nextLine();
-        String[] parts = text.split(" ");
-        
-        System.out.println(parts[0]);
+
+        while (true) {
+            String text = scanner.nextLine();
+            if (text.isEmpty()) {
+                break;
+            }
+            String[] parts = text.split(" ");
+
+            System.out.println(parts[0]);
+        }
     }
 }

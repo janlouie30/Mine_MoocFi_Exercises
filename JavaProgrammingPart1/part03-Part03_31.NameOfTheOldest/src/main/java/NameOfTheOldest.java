@@ -7,20 +7,21 @@ public class NameOfTheOldest {
         Scanner scanner = new Scanner(System.in);
         int oldest = 0;
         String nameOldest = "";
-        
-        while(true) {
+
+        while (true) {
             String input = scanner.nextLine();
-            if(input.isEmpty()) {
+            if (input.isEmpty()) {
                 break;
             }
-            
+
             String[] parts = input.split(",");
             int age = Integer.parseInt(parts[1]);
-            if(oldest < age) {
+            if (oldest < age) {
+                oldest = age;
                 nameOldest = parts[0];
             }
         }
-        
+
         System.out.println("Name of the oldest: " + nameOldest);
     }
 }
