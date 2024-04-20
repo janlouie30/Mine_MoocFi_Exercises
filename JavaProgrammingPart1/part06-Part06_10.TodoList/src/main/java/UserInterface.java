@@ -1,48 +1,59 @@
 import java.util.Scanner;
 
 public class UserInterface {
-    private TodoList list;
-    private Scanner scn;
 
-    public UserInterface(TodoList todo, Scanner scanner) {
-        this.list = todo;
-        this.scn = scanner;
-    }
+    private Scanner reader;
+    private TodoList currentList;
 
-    public void stop() {
-        System.exit(0);
+    public UserInterface(TodoList daList, Scanner scn) {
+        this.reader = scn;
+        this.currentList = daList;
     }
 
     public void start() {
         while (true) {
             System.out.print("Command: ");
-            String cmd = scn.nextLine();
+            String cmd = reader.nextLine().trim();
 
             if (cmd.equals("stop")) {
-                this.stop();
+                break;
             }
 
             switch (cmd) {
                 case "add":
-                    System.out.print("To add: ");
-                    String addedWord = scn.nextLine();
-
-                    list.add(addedWord);
+                    taskAdd();
                     break;
                 case "list":
-                    list.print();
+                    taskList();
                     break;
                 case "remove":
-                    System.out.print("Which one is removed? ");
-                    int number = Integer.parseInt(scn.nextLine());
-
-                    list.remove(number);
+                    taskRemove();
                     break;
                 default:
-                    System.out.println("Unknown Command");
+                    System.out.println("ERROR: Unknown Command!");
                     break;
             }
-
         }
     }
+
+    public void taskAdd() {
+        System.out.print("To add: ");
+        String task = reader.nextLine();
+        currentList.add(task);
+    }
+
+    public void taskList() {
+        currentList.print();
+    }
+
+    public void taskRemove() {
+        try {
+            System.out.print("Which one is removed? ");
+            int toBeRemoved = Integer.parseInt(reader.nextLine());
+            currentList.remove(toBeRemoved);
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR: Must contain a number or integer.");
+        }
+    }
+
 }

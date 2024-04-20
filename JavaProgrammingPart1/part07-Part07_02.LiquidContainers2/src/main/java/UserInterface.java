@@ -2,48 +2,51 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private Container firstLevel;
-    private Container secondLevel;
-    private Scanner scanner;
+    private Scanner scn;
+    private Container firstContainer;
+    private Container secondContainer;
 
-    public UserInterface(Container first, Container second, Scanner scn) {
-        this.firstLevel = first;
-        this.secondLevel = second;
-        this.scanner = scn;
-    }
-
-    public void stop() {
-        System.exit(0);
+    public UserInterface(Scanner scanner) {
+        scn = scanner;
+        firstContainer = new Container();
+        secondContainer = new Container();
     }
 
     public void start() {
         while (true) {
-            System.out.println("First: " + firstLevel);
-            System.out.println("Second: " + secondLevel);
-            String cmd = scanner.nextLine();
+            System.out.println("First: " + firstContainer);
+            System.out.println("Second: " + secondContainer);
+            String input = scn.nextLine();
 
-            if (cmd.equals("quit")) {
-                this.stop();
+            if (input.equals("quit")) {
+                break;
             }
 
-            String[] parts = cmd.split(" ");
-            int amount = Integer.parseInt(parts[1]);
+            String[] parts = input.split(" ");
+            int value = Integer.parseInt(parts[1]);
 
             switch (parts[0]) {
                 case "add":
-                    firstLevel.add(amount);
+                    firstContainer.add(value);
                     break;
                 case "move":
-                    firstLevel.remove(amount);
-                    secondLevel.add(amount);
+                    if (value >= firstContainer.contains()) {
+                        int amountToMove = value - (value - firstContainer.contains());
+                        firstContainer.remove(amountToMove);
+                        secondContainer.add(amountToMove);
+                    } else {
+                        firstContainer.remove(value);
+                        secondContainer.add(value);
+                    }
                     break;
                 case "remove":
-                    secondLevel.remove(amount);
+                    secondContainer.remove(value);
                     break;
                 default:
-                    System.out.println("Unknown Command");
                     break;
             }
+
+            System.out.println();
         }
     }
 
