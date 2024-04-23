@@ -51,4 +51,12 @@ public class SimpleDate {
         return this.year - other.year - yearRemoved;
     }
 
+    public int hashCode() {
+        int result = 17; // this prime number is commonly used to avoid collision of hashcodes
+        result = 31 * result + day;
+        result = 31 * result + month;
+        result = 31 * result + (year - 1900);
+        return result;
+    }
+
 }
